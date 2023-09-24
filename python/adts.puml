@@ -1,0 +1,104 @@
+'@startuml
+''https://plantuml.com/class-diagram
+'
+'abstract class AbstractList
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+'
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+'
+'enum TimeUnit {
+'DAYS
+'HOURS
+'MINUTES
+'}
+
+class Multiset {
+    +bool add(Any item)
+    +void remove(Any item)
+    +bool contains(Any item)
+    +bool is_empty()
+    +int count(Any item)
+    +int size()
+}
+
+class Tree {
+    -Any _root
+    -list[Tree] _subtrees
+
+'I am skipping __init__
+    +bool is_empty()
+    +int __len__()
+    +int count(Any item)
+    +str __str__()
+    -str _str_indented(int depth)
+    +float average()
+    -tuple[int, int] _average_helper()
+    +bool __eq__(Tree other)
+    +bool __contains__(Any item)
+    +list leaves()
+    +bool delete_item(Any item)
+    -void _delete_root()
+    -Any _extract_leaf()
+    +void insert(Any item)
+    +bool insert_child(Any item, Any parent)
+}
+
+class TreeMultiSet {
+    -Tree _tree
+    +bool add(Any item)
+    +void remove(Any item)
+    +bool contains(Any item)
+    +bool is_empty()
+    +int count(Any item)
+    +int size()
+}
+
+class ArrayListMultiSet {
+    -list _list
+    +bool add(Any item)
+    +void remove(Any item)
+    +bool contains(Any item)
+    +bool is_empty()
+    +int count(Any item)
+    +int size()
+}
+
+class LinkedListMultiSet {
+    -Node | None _front
+    -int _size
+    +bool add(Any item)
+    +void remove(Any item)
+    +bool contains(Any item)
+    +bool is_empty()
+    +int count(Any item)
+    +int size()
+}
+
+class _Node {
+'Although this is not private instance in Python code,
+'since the class is private, I am just using - to indicate private
+    -Any item
+    -Node | None next
+}
+
+Multiset <|-- TreeMultiSet
+Multiset <|-- ArrayListMultiSet
+Multiset <|-- LinkedListMultiSet
+
+TreeMultiSet --|> Tree
+ArrayListMultiSet --|> list
+LinkedListMultiSet --|> _Node
+
+@enduml
